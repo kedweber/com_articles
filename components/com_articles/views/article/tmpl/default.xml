@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_ARTICLES_ARTICLE_VIEW_DEFAULT_TITLE" option="COM_ARTICLES_ARTICLE_VIEW_DEFAULT_TITLE">
+		<message>
+			<![CDATA[COM_ARTICLES_ARTICLE_VIEW_DESCRIPTION]]>
+		</message>
+	</layout>
+
+    <fields name="request">
+        <fieldset name="request"
+                  addfieldpath="/components/com_articles/forms/fields">
+
+            <field name="id" type="article"
+                   label="COM_ARTICLES_FIELD_SELECT_ARTICLE_LABEL"
+                   required="true"
+                   description="COM_ARTICLES_FIELD_SELECT_ARTICLE_DESC"
+                    />
+        </fieldset>
+    </fields>
+</metadata>
