@@ -35,10 +35,6 @@ class ComArticlesViewArticlesHtml extends ComDefaultViewHtml
         $url = 'index.php?option=com_articles&view=articles';
         $item = JApplication::getInstance('site')->getMenu()->getItems('link', $url, true);
 
-        if(!in_array($item->title, $pathway->getPathwayNames())) {
-            $pathway->addItem('News', 'index.php?option=com_articles&view=articles');
-        }
-
         if($this->getModel()->getState()->ancestor_id) {
             $region = $this->getService('com://admin/regions.model.regions')->taxonomy_taxonomy_id($this->getModel()->getState()->ancestor_id)->getItem();
             $pathway->addItem($region->title);

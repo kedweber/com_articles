@@ -17,4 +17,30 @@
                     />
         </fieldset>
     </fields>
+    <fields name="params">
+        <fieldset name="basic"
+                  label="COM_ARTICLES_ATTRIBS_ARTICLE_SETTINGS_LABEL">
+
+            <field
+                    name="show_publishdate"
+                    type="radio"
+                    class="btn-group"
+                    label="ARTICLES_SHOW_PUBLISHDATE_LABEL"
+                    description="ARTICLES_SHOW_PUBLISHDATE_DESCRIPTION"
+                    default="1">
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+            <field
+                    name="show_socialbuttons"
+                    type="radio"
+                    class="btn-group"
+                    label="ARTICLES_SHOW_SOCIALBUTTONS_LABEL"
+                    description="ARTICLES_SHOW_SOCIALBUTTONS_DESCRIPTION"
+                    default="1">
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+        </fieldset>
+    </fields>
 </metadata>

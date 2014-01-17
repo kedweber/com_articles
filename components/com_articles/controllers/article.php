@@ -17,7 +17,7 @@ class ComArticlesControllerArticle extends ComDefaultControllerDefault
     {
         $config->append(array(
             'behaviors' => array(
-                'cacheable'
+                'com://admin/moyo.controller.behavior.cacheable'
             )
         ));
 

@@ -33,12 +33,15 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
         $article = $this->getModel()->getItem();
 
         $doc =& JFactory::getDocument();
+        $doc->setTitle($article->title);
         $doc->setMetaData('Keywords', $article->meta_keywords);
         $doc->setMetaData('Description', $article->meta_description);
 
+        //TODO: Check if itemId
         $pathway = JFactory::getApplication()->getPathway();
-        $pathway->addItem('News', 'index.php?option=com_articles&view=articles');
-        $pathway->addItem($article->title);
+        if(!in_array($article->title, $pathway->getPathwayNames())) {
+            $pathway->addItem($article->title);
+        }
 
         $article->regions = '';
         $regions = $this->getService('com://admin/regions.model.regions')->getList();
@@ -51,8 +54,19 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
             }
         }
 
+        $menus  =& JSite::getMenu();
+        $menu   = $menus->getActive();
+
+        $params   = new KConfig(json_decode($menu->params, true));
+
+        $params->append(array(
+            'show_publishdate'      => 1,
+            'show_socialbuttons'    => 1
+        ));
+
         $this->assign('article', $article);
         $this->assign('regions', $regions);
+        $this->assign('params', $params);
 
         return parent::display();
     }

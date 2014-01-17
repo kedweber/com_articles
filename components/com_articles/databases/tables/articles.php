@@ -12,12 +12,6 @@ class ComArticlesDatabaseTableArticles extends KDatabaseTableDefault
 
         $config->append(array(
             'behaviors' => array(
-                'lockable',
-                'creatable',
-                'modifiable',
-                'identifiable',
-                'orderable',
-                'sluggable',
                 'com://admin/cck.database.behavior.elementable',
                 $relationable,
                 'com://admin/translations.database.behavior.translatable',

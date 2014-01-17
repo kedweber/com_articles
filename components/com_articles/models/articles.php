@@ -1,6 +1,6 @@
 <?php
 
-class ComArticlesModelArticles extends ComDefaultModelDefault
+class ComArticlesModelArticles extends ComTaxonomyModelDefault
 {
     /**
      * @param KConfig $config
@@ -10,7 +10,7 @@ class ComArticlesModelArticles extends ComDefaultModelDefault
         parent::__construct($config);
 
         $this->_state
-            ->insert('ancestor_id'    , 'int')
+            ->insert('category_id'  , 'int')
             ->insert('enabled'      , 'int')
         ;
     }
@@ -24,6 +24,10 @@ class ComArticlesModelArticles extends ComDefaultModelDefault
 
         parent::_buildQueryWhere($query);
 
+        if(is_numeric($state->category_id)) {
+            $query->where('tbl.category_id', '=', $state->category_id);
+        }
+
         if(is_numeric($state->enabled)) {
             $query->where('tbl.enabled', '=', $state->enabled);
         }
@@ -31,38 +35,10 @@ class ComArticlesModelArticles extends ComDefaultModelDefault
         $query->where('tbl.enabled', '=', 1);
     }
 
-    protected function _buildQueryHaving(KDatabaseQuery $query)
+    protected function _buildQueryOrder(KDatabaseQuery $query)
     {
-        $state = $this->_state;
+        $query->order('publish_up', 'DESC');
 
-        parent::_buildQueryHaving($query);
-
-        if(is_numeric($state->ancestor_id)) {
-            $query->having('(FIND_IN_SET('.$state->ancestor_id.', LOWER(ANCESTORS)))');
-        }
-    }
-
-    /**
-     * @return int
-     */
-    public function getTotal()
-    {
-        if (!isset($this->_total)) {
-            if ($this->isConnected()) {
-                $query = $this->getTable()->getDatabase()->getQuery();
-
-                $this->_buildQueryColumns($query);
-                $this->_buildQueryFrom($query);
-                $this->_buildQueryJoins($query);
-                $this->_buildQueryWhere($query);
-                $this->_buildQueryGroup($query);
-                $this->_buildQueryHaving($query);
-
-                $total = count($this->getTable()->select($query, KDatabase::FETCH_FIELD_LIST));
-                $this->_total = $total;
-            }
-        }
-
-        return $this->_total;
+        parent::_buildQueryOrder($query);
     }
 }

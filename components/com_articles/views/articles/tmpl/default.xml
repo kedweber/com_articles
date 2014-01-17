@@ -5,4 +5,14 @@
 			<![CDATA[COM_ARTICLES_ARTICLES_VIEW_DESCRIPTION]]>
 		</message>
 	</layout>
+    <fields name="request">
+        <fieldset name="request">
+            <field name="category_id" type="category"
+                   description="JGLOBAL_CHOOSE_CATEGORY_DESC"
+                   extension="com_content"
+                   label="JGLOBAL_CHOOSE_CATEGORY_LABEL"
+                   required="true"
+                    />
+        </fieldset>
+    </fields>
 </metadata>
