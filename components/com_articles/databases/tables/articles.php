@@ -6,7 +6,7 @@ class ComArticlesDatabaseTableArticles extends KDatabaseTableDefault
     {
         $relationable = $this->getBehavior('com://admin/taxonomy.database.behavior.relationable',
             array(
-                'ancestors'     => array('regions'),
+                'ancestors'     => array('regions', 'categories'),
             )
         );
 

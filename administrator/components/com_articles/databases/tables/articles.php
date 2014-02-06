@@ -19,7 +19,7 @@ class ComArticlesDatabaseTableArticles extends KDatabaseTableDefault
         $config->append(array(
             'behaviors' => array(
                 'lockable',
-                'creatable',
+                'com://admin/moyo.database.behavior.creatable',
                 'modifiable',
                 'identifiable',
                 'orderable',

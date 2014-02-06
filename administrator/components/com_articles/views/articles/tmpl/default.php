@@ -31,6 +31,17 @@
                 <th>
                     <?= @helper('grid.sort', array('column' => 'frontpage', 'title' => @text('FRONTPAGE'))); ?>
                 </th>
+                <? if($articles->isTranslatable()) : ?>
+                    <th>
+                        <?= @text('Translations') ?>
+                    </th>
+                <? endif; ?>
+                <th>
+                    <?= @text('Owner'); ?>
+                </th>
+                <th>
+                    <?= @helper('grid.sort', array('column' => 'created_on', 'title' => @text('Date'))); ?>
+                </th>
                 <th>
                     <?= @helper('grid.sort', array('column' => 'order', 'title' => @text('ORDER'))); ?>
                 </th>
@@ -42,7 +53,7 @@
 
             <tfoot>
             <tr>
-                <td colspan="6">
+                <td colspan="9">
                     <?= @helper('paginator.pagination', array('total' => $total)) ?>
                 </td>
             </tr>
@@ -65,6 +76,20 @@
                 <td>
                     <?= @helper('grid.enable', array('row' => $article, 'field' => 'frontpage')); ?>
                 </td>
+                <? if($article->isTranslatable()) : ?>
+                    <td>
+                        <?= @helper('com://admin/translations.template.helper.language.translations', array(
+                            'row' => $article->id,
+                            'table' => $article->getTable()->getName()
+                        )); ?>
+                    </td>
+                <? endif; ?>
+                <td>
+                    <?= $article->created_by_name; ?>
+                </td>
+                <td>
+                    <?= @helper('date.humanize', array('date' => $article->created_on)) ?>
+                </td>
                 <td>
                     <?= @helper('grid.order', array('row' => $article, 'total' => $total)); ?>
                 </td>
@@ -76,7 +101,7 @@
 
             <? if (!count($articles)) : ?>
             <tr>
-                <td colspan="5" align="center" style="text-align: center;">
+                <td colspan="9" align="center" style="text-align: center;">
                     <?= @text('ARTICLES_NO_ITEMS') ?>
                 </td>
             </tr>

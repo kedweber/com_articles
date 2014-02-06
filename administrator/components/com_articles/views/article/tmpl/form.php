@@ -53,6 +53,12 @@
                         <?= @helper('behavior.calendar', array('date' => $article->publish_down, 'name' => 'publish_down', 'format'  => '%Y-%m-%d')); ?>
                     </div>
                 </div>
+				<div class="control-group">
+					<label class="control-label"><?= @text('Translated'); ?></label>
+					<div class="controls">
+						<?= @helper('select.booleanlist', array('name' => 'translated', 'selected' => $article->translated)); ?>
+					</div>
+				</div>
             </fieldset>
 
             <fieldset>

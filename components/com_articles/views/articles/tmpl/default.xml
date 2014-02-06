@@ -6,12 +6,13 @@
 		</message>
 	</layout>
     <fields name="request">
-        <fieldset name="request">
-            <field name="category_id" type="category"
-                   description="JGLOBAL_CHOOSE_CATEGORY_DESC"
-                   extension="com_content"
-                   label="JGLOBAL_CHOOSE_CATEGORY_LABEL"
+        <fieldset name="request"
+                  addfieldpath="/components/com_makundi/forms/fields">
+
+            <field name="category" type="categories"
+                   label="COM_ARTICLES_FIELD_SELECT_CATEGORY_LABEL"
                    required="true"
+                   description="COM_ARTICLES_FIELD_SELECT_CATEGORY_DESC"
                     />
         </fieldset>
     </fields>
