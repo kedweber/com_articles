@@ -1,6 +1,6 @@
 <?php
 
-class ComArticlesModelArticles extends ComDefaultModelDefault
+class ComArticlesModelArticles extends ComTaxonomyModelDefault
 {
     /**
      * @param KConfig $config
