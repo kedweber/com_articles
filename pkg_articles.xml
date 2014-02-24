@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="1.6">
+    <name>Articles</name>
+    <author>Dave Li</author>
+    <creationDate>Februari 2014</creationDate>
+    <packagename>articles</packagename>
+    <version>1.0.0</version>
+    <url>http://www.moyoweb.nl/</url>
+    <packager>Dave Li</packager>
+    <packagerurl>http://www.moyoweb.nl/</packagerurl>
+    <description>Articles Package</description>
+    <files folder="packages">
+        <file type="component" id="articles">component</file>
+        <file type="module" id="articles" client="site">modules/mod_articles</file>
+    </files>
+</extension>

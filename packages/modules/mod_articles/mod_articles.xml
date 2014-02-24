@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+        type="module"
+        version="3.1"
+        client="site"
+        method="upgrade">
+	<name>Articles</name>
+	<creationDate>February 2014</creationDate>
+    <author>Dave Li</author>
+    <authorEmail>dave@moyoweb.nl</authorEmail>
+    <authorUrl>http://www.moyoweb.nl</authorUrl>
+    <copyright>Copyright (C) 2006 - 2014 Moyo Web Architects (ICTIP B.V). All rights reserved.</copyright>
+    <license>Commercial</license>
+    <version>1.0.0</version>
+    <description>Articles</description>
+	<files>
+		<file module="mod_articles">mod_articles.php</file>
+		<file>html.php</file>
+	</files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" addfieldpath="/components/com_articles/forms/fields">>
+                <field name="id" type="article"
+                       label="COM_ARTICLES_FIELD_SELECT_ARTICLE_LABEL"
+                       required="true"
+                       description="COM_ARTICLES_FIELD_SELECT_ARTICLE_DESC"
+                        />
+                <field
+                        name="limit"
+                        type="text"
+                        default="3"
+                        label="Limit"
+                        description="Limit the articles to show.">
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

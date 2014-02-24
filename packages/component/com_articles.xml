@@ -33,7 +33,6 @@
     </files>
 
     <administration>
-
         <files folder="administrator/components/com_articles">
             <file>dispatcher.php</file>
             <file>articles.php</file>

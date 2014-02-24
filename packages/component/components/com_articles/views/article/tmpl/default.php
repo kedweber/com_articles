@@ -189,8 +189,8 @@ defined('KOOWA') or die('Protected resource'); ?>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn-primary pull-left col-sm-offset-2">Send</button>
-                    <button type="button" class="btn-default pull-left" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary pull-left col-sm-offset-2">Send</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
                 </div>
             </div><!-- /.modal-content -->
         </form>
