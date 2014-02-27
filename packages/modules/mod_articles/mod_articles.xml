@@ -14,6 +14,8 @@
     <version>1.0.0</version>
     <description>Articles</description>
 	<files>
+		<folder>tmpl</folder>
+		<folder>language</folder>
 		<file module="mod_articles">mod_articles.php</file>
 		<file>html.php</file>
 	</files>
