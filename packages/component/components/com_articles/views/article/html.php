@@ -26,11 +26,25 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
     }
 
     /**
+     * Sets the layout to the value of $article->layout if there is no layout param
+     *
+     * @param $article
+     */
+    private function resolveLayout($article)
+    {
+        if (!KRequest::get('get.layout', 'string') && $article->layout) {
+            $this->setLayout($article->layout);
+        }
+    }
+
+    /**
      * @return string
      */
     public function display()
     {
         $article = $this->getModel()->getItem();
+
+        $this->resolveLayout($article);
 
         $doc =& JFactory::getDocument();
         $doc->setTitle($article->title);
