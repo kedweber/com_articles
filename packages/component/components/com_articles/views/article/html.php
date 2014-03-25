@@ -25,16 +25,15 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
         parent::_initialize($config);
     }
 
-    /**
-     * Sets the layout to the value of $article->layout if there is no layout param
-     *
-     * @param $article
-     */
-    private function resolveLayout($article)
+    public function setLayout($layout)
     {
+        $article = $this->getModel()->getItem();
+
         if (!KRequest::get('get.layout', 'string') && $article->layout) {
-            $this->setLayout($article->layout);
+            $layout = $article->layout;
         }
+
+        parent::setLayout($layout);
     }
 
     /**
@@ -43,8 +42,6 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
     public function display()
     {
         $article = $this->getModel()->getItem();
-
-        $this->resolveLayout($article);
 
         $doc =& JFactory::getDocument();
         $doc->setTitle($article->title);
