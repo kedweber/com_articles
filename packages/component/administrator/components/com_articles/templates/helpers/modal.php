@@ -9,8 +9,8 @@ class ComArticlesTemplateHelperModal extends KTemplateHelperAbstract
             'attribs' => array(),
             'visible' => true,
             'link_text' => JText::_('SELECT'),
-            'link'  => JRoute::_('index.php?option=com_articles&view=articles&layout=modal&tmpl=component&function=Articles.selectArticle'),
-            'link_selector' => 'modal-button'
+            'link'  => JRoute::_('index.php?option=com_articles&view=articles&layout=modal&tmpl=component&function=Articles.selectArticle&enabled=1'),
+            'link_selector' => 'modal'
         ))->append(array(
             'value' => $config->name
         ));

@@ -6,15 +6,26 @@ class ComArticlesDatabaseTableArticles extends KDatabaseTableDefault
     {
         $relationable = $this->getBehavior('com://admin/taxonomy.database.behavior.relationable',
             array(
-                'ancestors'     => array('regions', 'categories'),
-            )
+				'ancestors' => array(
+					'category' => array(
+						'identifier' => 'com://admin/makundi.model.categories',
+						'identity_column' => 'makundi_category_id',
+						'table' => '#__makundi_categories',
+						'sort' => 'title',
+					),
+					'tags' => array(
+						'identifier' => 'com://admin/terms.model.tags',
+					),
+				),
+				'descendants' => array(
+					'articles' => array(
+						'identifier' => 'com://admin/articles.model.articles',
+					)
+				)
+			)
         );
 
-        $routable = $this->getBehavior('com://admin/routes.database.behavior.routable',
-            array(
-                'ancestors'     => array('regions', 'categories'),
-            )
-        );
+        $routable = $this->getBehavior('com://admin/routes.database.behavior.routable');
 
         $config->append(array(
             'behaviors' => array(
@@ -28,7 +39,11 @@ class ComArticlesDatabaseTableArticles extends KDatabaseTableDefault
                 $relationable,
                 'com://admin/translations.database.behavior.translatable',
                 $routable,
-            )
+                'com://admin/kutafuta.database.behavior.searchable',
+            ),
+			'filters' => array(
+				'fields' => array('html')
+			)
         ));
 
         parent::_initialize($config);

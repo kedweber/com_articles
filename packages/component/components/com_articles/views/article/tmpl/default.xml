@@ -1,46 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_ARTICLES_ARTICLE_VIEW_DEFAULT_TITLE" option="COM_ARTICLES_ARTICLE_VIEW_DEFAULT_TITLE">
+	<layout title="Single Article">
 		<message>
-			<![CDATA[COM_ARTICLES_ARTICLE_VIEW_DESCRIPTION]]>
+			Display a single article
 		</message>
 	</layout>
-
-    <fields name="request">
-        <fieldset name="request"
-                  addfieldpath="/components/com_articles/forms/fields">
-
-            <field name="id" type="article"
-                   label="COM_ARTICLES_FIELD_SELECT_ARTICLE_LABEL"
-                   required="true"
-                   description="COM_ARTICLES_FIELD_SELECT_ARTICLE_DESC"
-                    />
-        </fieldset>
-    </fields>
-    <fields name="params">
-        <fieldset name="basic"
-                  label="COM_ARTICLES_ATTRIBS_ARTICLE_SETTINGS_LABEL">
-
-            <field
-                    name="show_publishdate"
-                    type="radio"
-                    class="btn-group"
-                    label="ARTICLES_SHOW_PUBLISHDATE_LABEL"
-                    description="ARTICLES_SHOW_PUBLISHDATE_DESCRIPTION"
-                    default="1">
-                <option value="0">JHIDE</option>
-                <option value="1">JSHOW</option>
-            </field>
-            <field
-                    name="show_socialbuttons"
-                    type="radio"
-                    class="btn-group"
-                    label="ARTICLES_SHOW_SOCIALBUTTONS_LABEL"
-                    description="ARTICLES_SHOW_SOCIALBUTTONS_DESCRIPTION"
-                    default="1">
-                <option value="0">JHIDE</option>
-                <option value="1">JSHOW</option>
-            </field>
-        </fieldset>
-    </fields>
+	<fields name="request" addfieldpath="components/com_articles/forms/fields">
+		<fieldset name="request">
+			<field
+					name="id"
+					type="article"
+					label="Article"
+					description="Select the article to display"
+					/>
+		</fieldset>
+	</fields>
 </metadata>

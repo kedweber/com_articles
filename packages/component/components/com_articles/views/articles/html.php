@@ -1,14 +1,10 @@
 <?php
 /**
- * Com
+ * ComArticles
  *
- * @author      Dave Li <dave@moyoweb.nl>
- * @category    Nooku
- * @package     Socialhub
- * @subpackage  ...
- * @uses        Com_
+ * @author      Joep van der Heijden <joep.van.der.heijden@moyoweb.nl>
  */
- 
+
 defined('KOOWA') or die('Protected resource');
 
 class ComArticlesViewArticlesHtml extends ComDefaultViewHtml
@@ -25,21 +21,12 @@ class ComArticlesViewArticlesHtml extends ComDefaultViewHtml
         parent::_initialize($config);
     }
 
-    /**
-     * @return string
-     */
-    public function display()
-    {
-        $pathway = JFactory::getApplication()->getPathway();
+	public function display()
+	{
+		$depends_on = implode(' ', $this->getModel()->getList()->getColumn('id'));
 
-        $url = 'index.php?option=com_articles&view=articles';
-        $item = JApplication::getInstance('site')->getMenu()->getItems('link', $url, true);
+		header('X-Article-IDs: '.$depends_on);
 
-        if($this->getModel()->getState()->ancestor_id) {
-            $region = $this->getService('com://admin/regions.model.regions')->taxonomy_taxonomy_id($this->getModel()->getState()->ancestor_id)->getItem();
-            $pathway->addItem($region->title);
-        }
-
-        return parent::display();
-    }
+		return parent::display();
+	}
 }

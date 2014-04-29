@@ -2,13 +2,13 @@
 <extension type="package" version="1.6">
     <name>Articles</name>
     <author>Dave Li</author>
-    <creationDate>Februari 2014</creationDate>
+    <creationDate>April 2014</creationDate>
     <packagename>articles</packagename>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
     <url>http://www.moyoweb.nl/</url>
-    <packager>Dave Li</packager>
+    <packager>Joachim van de Haterd</packager>
     <packagerurl>http://www.moyoweb.nl/</packagerurl>
-    <description>Articles Package</description>
+    <description>Articles Package. Second version.</description>
     <files folder="packages">
         <file type="component" id="articles">component</file>
         <file type="module" id="articles" client="site">modules/mod_articles</file>

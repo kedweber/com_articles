@@ -1,21 +1,33 @@
 <? defined('KOOWA') or die; ?>
 
 <?= @helper('behavior.mootools'); ?>
-<!--
+
 <script src="media://lib_koowa/js/koowa.js" />
--->
 
 <div class="row-fluid">
     <form action="" method="get" class="-koowa-grid" data-toolbar=".toolbar-list">
         <div class="btn-toolbar" id="filter-bar">
             <div class="filter-search btn-group pull-left">
-                <input type="text" value="<?= $state->search; ?>" placeholder="Search" id="filter_search" name="search">
+                <input type="text" value="<?= $state->search; ?>" placeholder="Search" id="filter_search" name="search" style="margin-bottom: 0;">
             </div>
             <div class="btn-group pull-left hidden-phone">
                 <button title="" class="btn hasTooltip" type="submit" data-original-title="Search"><i class="icon-search"></i></button>
                 <button onclick="document.id('filter_search').value='';this.form.submit();" title="" class="btn hasTooltip" type="button" data-original-title="Clear"><i class="icon-remove"></i></button>
             </div>
         </div>
+
+        <?= @helper('com://admin/makundi.template.helper.listbox.categories', array(
+            'identifier' => 'com://admin/makundi.model.categories',
+            'prompt' => '- ' . JText::_('Filter by category') . ' -',
+            'check_access' => true,
+            'name' => 'category_id',
+            'attribs' => array(
+                'id' => 'category_id',
+                'onchange' => 'this.form.submit();',
+                'style' => 'margin-right: 5px;'
+            ),
+        )); ?>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -25,11 +37,14 @@
                 <th>
                     <?= @helper('grid.sort', array('column' => 'title', 'title' => @text('TITLE'))); ?>
                 </th>
+				<th>
+					<?= @helper('grid.sort', array('column' => 'category', 'title' => @text('CATEGORY'))); ?>
+				</th>
                 <th>
                     <?= @helper('grid.sort', array('column' => 'enabled', 'title' => @text('PUBLISHED'))); ?>
                 </th>
                 <th>
-                    <?= @helper('grid.sort', array('column' => 'frontpage', 'title' => @text('FRONTPAGE'))); ?>
+                    <?= @helper('grid.sort', array('column' => 'featured', 'title' => @text('FEATURED'))); ?>
                 </th>
                 <? if($articles->isTranslatable()) : ?>
                     <th>
@@ -70,11 +85,14 @@
                         <?= @escape($article->title); ?>
                     </a>
                 </td>
+				<td>
+					<?= $article->category->title ? $article->category->title : @text('UNCATEGORIZED'); ?>
+				</td>
                 <td>
                     <?= @helper('grid.enable', array('row' => $article)); ?>
                 </td>
                 <td>
-                    <?= @helper('grid.enable', array('row' => $article, 'field' => 'frontpage')); ?>
+                    <?= @helper('grid.enable', array('row' => $article, 'field' => 'featured')); ?>
                 </td>
                 <? if($article->isTranslatable()) : ?>
                     <td>

@@ -11,7 +11,7 @@
  
 defined('KOOWA') or die('Protected resource');
 
-class ComArticlesDatabaseRowArticle extends ComTaxonomyDatabaseRowDefault
+class ComArticlesViewJson extends ComTaxonomyViewJson
 {
 
 }

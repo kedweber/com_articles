@@ -13,21 +13,44 @@ defined('KOOWA') or die('Protected resource');
 
 class ComArticlesControllerArticle extends ComDefaultControllerDefault
 {
-    protected function _initialize(KConfig $config)
-    {
-        $config->append(array(
-            'behaviors' => array(
-                'com://admin/moyo.controller.behavior.cacheable'
+	/**
+	 * @param KConfig $config
+	 */
+	protected function _initialize(KConfig $config)
+	{
+		$cacheable = $this->getBehavior('com://site/moyo.controller.behavior.cacheable',
+			array(
+				'modules' => array(
+					'banner',
+					'left'
+				)
+			)
+		);
+
+        $metadataable = $this->getBehavior('com://site/articles.controller.behavior.metadataable',
+            array(
+                'og' => true
             )
-        ));
+        );
 
-        parent::_initialize($config);
-    }
+		$config->append(array(
+			'behaviors' => array(
+				$cacheable,
+                $metadataable,
+				'com://site/translations.controller.behavior.translatable'
+			)
+		));
 
-    public function getRequest()
-    {
-        $this->_request->limit = $this->_request->limit ? $this->_request->limit : 20;
+		parent::_initialize($config);
+	}
 
-        return $this->_request;
-    }
+	/**
+	 * @return array|KConfig
+	 */
+	public function getRequest()
+	{
+		$this->_request->limit = $this->_request->limit ? $this->_request->limit : 4;
+
+		return $this->_request;
+	}
 }

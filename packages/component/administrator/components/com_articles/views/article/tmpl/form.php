@@ -1,7 +1,6 @@
 <? defined('KOOWA') or die; ?>
 
 <?= @helper('behavior.mootools'); ?>
-<?= @helper('behavior.modal'); ?>
 
 <?= @helper('behavior.keepalive'); ?>
 <?= @helper('behavior.validator'); ?>
@@ -31,12 +30,16 @@
                         <input class="span12" type="text" name="slug" value="<?= $article->slug; ?>" placeholder="<?= @text('SLUG'); ?>" />
                     </div>
                 </div>
+				<div class="control-group">
+					<label class="control-label"><?= @text('FIELDSET'); ?></label>
+					<?= @template('com://admin/cck.view.connection.listbox'); ?>
+				</div>
             </fieldset>
 
             <fieldset>
-                <legend><?= @text('FIELDSET'); ?></legend>
-                <?= @service('com://admin/cck.controller.element')->cck_fieldset_id($article->cck_fieldset_id)->row($article->id)->table('articles_articles')->getView()->assign('row', $article)->layout('list')->display(); ?>
-            </fieldset>
+                <legend><?= @text('FIELDS'); ?></legend>
+				<div id="fieldset"></div>
+         	</fieldset>
         </div>
         <div class="span4">
             <fieldset>
@@ -53,6 +56,12 @@
                         <?= @helper('behavior.calendar', array('date' => $article->publish_down, 'name' => 'publish_down', 'format'  => '%Y-%m-%d')); ?>
                     </div>
                 </div>
+				<div class="control-group">
+					<label class="control-label"><?= @text('PUBLISHED'); ?></label>
+					<div class="controls">
+						<?= @helper('select.booleanlist', array('name' => 'enabled', 'selected' => $article->enabled)); ?>
+					</div>
+				</div>
 				<div class="control-group">
 					<label class="control-label"><?= @text('Translated'); ?></label>
 					<div class="controls">
@@ -80,7 +89,7 @@
             <fieldset>
                 <legend><?= @text('RELATIONS'); ?></legend>
                 <div class="control-group">
-                    <label class="control-label"><?= @text('CATEGORIES'); ?></label>
+                    <label class="control-label"><?= @text('CATEGORY'); ?></label>
 
                     <? if($article->isRelationable()) : ?>
                         <? $test = $article->getRelation(array('type' => 'ancestors', 'filter' => array('type' => 'category')))->getIds('taxonomy_taxonomy_id'); ?>
@@ -91,18 +100,31 @@
                             'value' => 'taxonomy_taxonomy_id',
                             'deselect' => true,
                             'check_access' => true,
-                            'name' => 'categories[]',
-                            'attribs' => array('id' => 'parent_id', 'multiple' => true),
-                            'selected' => $test
+                            'name' => 'category',
+                            'attribs' => array('id' => 'parent_id'),
+                            'selected' => $test,
+							'filter' => array('type' => 'category')
                         )); ?>
                     </div>
                 </div>
-<!--                <div class="control-group">-->
-<!--                    <label class="control-label">--><?//= @text('REGIONS'); ?><!--</label>-->
-<!--                    <div class="controls">-->
-<!--                        --><?//= @helper('com://admin/taxonomy.template.helper.listbox.taxonomies', array('identifier' => 'com://admin/regions.model.regions', 'name' => 'regions[]', 'attribs' => array('multiple' => true, 'size' => 10), 'type' => 'region', 'relation' => 'ancestors')); ?>
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="control-group">
+                    <label class="control-label"><?= @text('TAGS'); ?></label>
+                    <div class="controls">
+                        <?= @helper('com://admin/taxonomy.template.helper.listbox.taxonomies', array(
+							'identifier' => 'com://admin/terms.model.tags',
+							'name' => 'tags[]',
+							'attribs' => array('multiple' => true, 'size' => 10),
+							'type' => 'tag',
+							'relation' => 'ancestors'
+						)); ?>
+                    </div>
+                </div>
+				<div class="control-group">
+					<label class="control-label"><?= @text('RELATED_ARTICLES'); ?></label>
+					<div class="controls">
+						<?= @helper('com://admin/taxonomy.template.helper.listbox.taxonomies', array('identifier' => 'com://admin/articles.model.articles', 'name' => 'articles[]', 'attribs' => array('multiple' => true, 'size' => 10), 'type' => array('new;'))); ?>
+					</div>
+				</div>
             </fieldset>
         </div>
     </div>

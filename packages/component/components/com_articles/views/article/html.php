@@ -1,12 +1,8 @@
 <?php
 /**
- * Com
+ * ComArticles
  *
- * @author      Dave Li <dave@moyoweb.nl>
- * @category    Nooku
- * @package     Socialhub
- * @subpackage  ...
- * @uses        Com_
+ * @author      Joep van der Heijden <joep.van.der.heijden@moyoweb.nl>
  */
  
 defined('KOOWA') or die('Protected resource');
@@ -29,56 +25,49 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
     {
         $article = $this->getModel()->getItem();
 
-        if (!KRequest::get('get.layout', 'string') && $article->layout) {
-            $layout = $article->layout;
+        if (!KRequest::get('get.layout', 'string') && $article->type) {
+            $layout = $article->type;
         }
 
         parent::setLayout($layout);
     }
 
-    /**
-     * @return string
-     */
-    public function display()
-    {
-        $article = $this->getModel()->getItem();
+	public function display()
+	{
+		$article = $this->getModel()->getItem();
 
-        $doc =& JFactory::getDocument();
-        $doc->setTitle($article->title);
-        $doc->setMetaData('Keywords', $article->meta_keywords);
-        $doc->setMetaData('Description', $article->meta_description);
+		header('X-Article-ID: '.$article->id);
 
-        //TODO: Check if itemId
-        $pathway = JFactory::getApplication()->getPathway();
-        if(!in_array($article->title, $pathway->getPathwayNames())) {
-            $pathway->addItem($article->title);
-        }
+		$doc =& JFactory::getDocument();
+		$doc->setTitle($article->title);
+		$doc->setMetaData('Keywords', $article->meta_keywords);
+		$doc->setMetaData('Description', $article->meta_description);
 
-        $article->regions = '';
-        $regions = $this->getService('com://admin/regions.model.regions')->getList();
+		//TODO: Check if itemId
+		$pathway = JFactory::getApplication()->getPathway();
 
-        foreach($regions as $region) {
-            foreach(explode(',', $article->ancestors) as $ancestor) {
-                if ($region->taxonomy_taxonomy_id === $ancestor) {
-                    $article->regions .= $region->title . ' ';
-                }
-            }
-        }
+		if(!JApplication::getInstance('site')->getMenu()->getItems('link', 'index.php?option=com_articles&view=article&id='.$article->id, true)) {
+			if($article->category instanceof KDatabaseRowDefault) {
+				$category = $article->category;
 
-        $menus  =& JSite::getMenu();
-        $menu   = $menus->getActive();
+				$item = JApplication::getInstance('site')->getMenu()->getItems('link', 'index.php?option=com_makundi&view=category&id='.$category->id, true);
 
-        $params   = new KConfig(json_decode($menu->params, true));
+				if($item) {
+					$i = 0;
+					foreach(explode('/', $item->route) as $part) {
+						$pathway->addItem(ucfirst($part), 'index.php?Itemid='.$item->tree[$i]);
+						$i++;
+					}
+				} else {
+					if(!JSite::getMenu()->getActive()->id) {
+						$pathway->addItem($category->title, JRoute::_('index.php?option=com_makundi&view=category&id='.$category->id));
+					}
+				}
 
-        $params->append(array(
-            'show_publishdate'      => 1,
-            'show_socialbuttons'    => 1
-        ));
+				$pathway->addItem($article->title);
+			}
+		}
 
-        $this->assign('article', $article);
-        $this->assign('regions', $regions);
-        $this->assign('params', $params);
-
-        return parent::display();
-    }
+		return parent::display();
+	}
 }

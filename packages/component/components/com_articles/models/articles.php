@@ -1,17 +1,26 @@
 <?php
+/**
+ * ComArticles
+ *
+ * @author      Joep van der Heijden <joep.van.der.heijden@moyoweb.nl>
+ */
 
-class ComArticlesModelArticles extends ComTaxonomyModelDefault
+class ComArticlesModelArticles extends ComDefaultModelDefault
 {
-    /**
-     * @param KConfig $config
-     */
+	/**
+	 *
+	 */
     public function __construct(KConfig $config)
     {
         parent::__construct($config);
 
         $this->_state
-            ->insert('category_id'  , 'int')
-            ->insert('enabled'      , 'int')
+			->insert('category_id'     	, 'int')
+			->insert('tag'     	        , 'int')
+			->insert('featured'     	, 'int', null, true)
+            ->insert('enabled'      	, 'int')
+			->insert('sort'     		, 'cmd', 'publish_up')
+			->insert('direction'		, 'word', 'desc')
         ;
     }
 
@@ -22,23 +31,39 @@ class ComArticlesModelArticles extends ComTaxonomyModelDefault
     {
         $state = $this->_state;
 
-        parent::_buildQueryWhere($query);
+		if($state->featured) {
+			$query->where('tbl.featured', '=', $state->featured);
+		}
 
-        if(is_numeric($state->category_id)) {
-            $query->where('tbl.category_id', '=', $state->category_id);
-        }
+		parent::_buildQueryWhere($query);
 
-        if(is_numeric($state->enabled)) {
-            $query->where('tbl.enabled', '=', $state->enabled);
+		if(is_numeric($state->category_id)) {
+			$query->where('ancestors', 'REGEXP', '(.*"category":"'.$state->category_id.'")');
+		}
+
+		if(is_array($state->ancestors)) {
+			foreach($state->ancestors as $type => $value) {
+				$query->where('ancestors', 'REGEXP', '(.*"'.KInflector::singularize($type).'":"'.$value.'")');
+			}
+		}
+
+		if(is_array($state->category_id)) {
+			foreach($state->category_id as $category_id) {
+				$query->where('ancestors', 'REGEXP', '(.*"category":"'.$category_id.'")', 'OR');
+			}
+		}
+
+        if(is_numeric($state->tag)) {
+            $query->where('FIND_IN_SET('.$state->tag.', REPLACE(SUBSTRING_INDEX(SUBSTR(ANCESTORS,LOCATE(\'"TAGS":["\',ANCESTORS)+CHAR_LENGTH(\'"TAGS":["\')),\'"]\', 1),\'"\', \'\'))', null, null);
         }
 
         $query->where('tbl.enabled', '=', 1);
     }
 
-    protected function _buildQueryOrder(KDatabaseQuery $query)
-    {
-        $query->order('publish_up', 'DESC');
+	protected function _buildQueryOrder(KDatabaseQuery $query)
+	{
+		parent::_buildQueryOrder($query);
 
-        parent::_buildQueryOrder($query);
-    }
+		$query->order('tbl.publish_up', 'desc');
+	}
 }

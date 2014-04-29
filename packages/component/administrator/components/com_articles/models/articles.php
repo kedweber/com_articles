@@ -10,7 +10,10 @@ class ComArticlesModelArticles extends ComTaxonomyModelDefault
         parent::__construct($config);
 
         $this->_state
-            ->insert('enabled', 'int')
+			->insert('category_id'     	, 'int')
+			->insert('sort'     , 'cmd', 'id')
+			->insert('direction', 'word', 'desc')
+            ->insert('enabled'	, 'int')
         ;
     }
 
@@ -23,7 +26,11 @@ class ComArticlesModelArticles extends ComTaxonomyModelDefault
 
         parent::_buildQueryWhere($query);
 
-        if(is_numeric($state->enabled)) {
+		if(is_numeric($state->category_id)) {
+			$query->where('ancestors', 'REGEXP', '(.*"category":"'.$state->category_id.'")');
+		}
+
+		if(is_numeric($state->enabled)) {
             $query->where('tbl.enabled', '=', $state->enabled);
         }
 
