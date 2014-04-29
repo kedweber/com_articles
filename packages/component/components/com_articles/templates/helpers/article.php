@@ -10,33 +10,6 @@ defined('KOOWA') or die('Restricted Access');
 
 class ComArticlesTemplateHelperArticle extends KTemplateHelperAbstract
 {
-    private function links(KConfig $config)
-    {
-        $html = '';
-
-        // TODO: future change for multiple links
-        if ($config->article->urls) {
-            $url = $this->getService('com://site/moyo.template.helper.parser')->link(array('url' => $config->article->url));
-
-            $html .= '<h2>'. $this->translate('LINKS') .'</h2>
-                    <ul>
-                        <li><a href="'. $url .'" target="_blank">' . $url_title . '</a></li>
-                    </ul>';
-        }
-
-        return $html;
-    }
-
-    private function relatedDocuments(KConfig $config)
-    {
-        // TODO: future change for multiple related documents links
-        return '<h2>'. $this->translate('RELATED_DOCUMENTS') .'</h2>
-                <ul>
-                    <li>link 1</li>
-                    <li>link 2</li>
-                </ul>';
-    }
-
     public function footer($config = array())
     {
         $config = new KConfig($config);
