@@ -68,7 +68,7 @@
 
             <tfoot>
             <tr>
-                <td colspan="9">
+                <td colspan="20">
                     <?= @helper('paginator.pagination', array('total' => $total)) ?>
                 </td>
             </tr>
@@ -119,7 +119,7 @@
 
             <? if (!count($articles)) : ?>
             <tr>
-                <td colspan="9" align="center" style="text-align: center;">
+                <td colspan="20" align="center" style="text-align: center;">
                     <?= @text('ARTICLES_NO_ITEMS') ?>
                 </td>
             </tr>
