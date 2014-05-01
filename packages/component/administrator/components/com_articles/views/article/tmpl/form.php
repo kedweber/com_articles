@@ -122,7 +122,7 @@
 				<div class="control-group">
 					<label class="control-label"><?= @text('RELATED_ARTICLES'); ?></label>
 					<div class="controls">
-						<?= @helper('com://admin/taxonomy.template.helper.listbox.taxonomies', array('identifier' => 'com://admin/articles.model.articles', 'name' => 'articles[]', 'attribs' => array('multiple' => true, 'size' => 10), 'type' => array('new;'))); ?>
+						<?= @helper('com://admin/taxonomy.template.helper.listbox.taxonomies', array('identifier' => 'com://admin/articles.model.articles', 'name' => 'articles[]', 'attribs' => array('multiple' => true, 'size' => 10), 'table' => $article->getTable()->getBase())); ?>
 					</div>
 				</div>
             </fieldset>
