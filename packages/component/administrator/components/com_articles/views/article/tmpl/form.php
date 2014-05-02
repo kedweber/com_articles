@@ -113,7 +113,7 @@
                         <?= @helper('com://admin/taxonomy.template.helper.listbox.taxonomies', array(
 							'identifier' => 'com://admin/terms.model.tags',
 							'name' => 'tags[]',
-							'attribs' => array('multiple' => true, 'size' => 10),
+							'attribs' => array('multiple' => true, 'size' => 10, 'class' => 'select2-listbox'),
 							'type' => 'tag',
 							'relation' => 'ancestors'
 						)); ?>
@@ -122,7 +122,17 @@
 				<div class="control-group">
 					<label class="control-label"><?= @text('RELATED_ARTICLES'); ?></label>
 					<div class="controls">
-						<?= @helper('com://admin/taxonomy.template.helper.listbox.taxonomies', array('identifier' => 'com://admin/articles.model.articles', 'name' => 'articles[]', 'attribs' => array('multiple' => true, 'size' => 10), 'table' => $article->getTable()->getBase())); ?>
+						<?= @helper('com://admin/taxonomy.template.helper.listbox.taxonomies', array(
+                            'identifier' => 'com://admin/articles.model.articles',
+                            'name' => 'articles[]',
+                            'attribs' => array('multiple' => true, 'size' => 10, 'class' => 'select2-listbox'),
+                            'filter' => array(
+                                'type' => $article->getTypes(),
+                                'exclude' => array(
+                                    'articles_article_id' => array($article->id)
+                                )
+                            )
+                        )); ?>
 					</div>
 				</div>
             </fieldset>

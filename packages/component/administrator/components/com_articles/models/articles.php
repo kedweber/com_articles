@@ -14,6 +14,7 @@ class ComArticlesModelArticles extends ComTaxonomyModelDefault
 			->insert('sort'     , 'cmd', 'id')
 			->insert('direction', 'word', 'desc')
             ->insert('enabled'	, 'int')
+            ->insert('exclude', 'raw')
         ;
     }
 
@@ -36,6 +37,12 @@ class ComArticlesModelArticles extends ComTaxonomyModelDefault
 
         if($state->search) {
             $query->where('tbl.title', 'LIKE', '%'.$state->search.'%');
+        }
+
+        if($state->exclude) {
+            foreach($state->exclude as $key => $exclude) {
+                $query->where('tbl.' . $key, 'NOT IN', $exclude);
+            }
         }
     }
 }
