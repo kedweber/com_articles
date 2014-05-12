@@ -15,6 +15,7 @@ class ComArticlesModelArticles extends ComDefaultModelDefault
         parent::__construct($config);
 
         $this->_state
+			->insert('slug'     		, 'string', null, true)
 			->insert('category_id'     	, 'int')
 			->insert('tag'     	        , 'int')
 			->insert('featured'     	, 'int', null, true)
