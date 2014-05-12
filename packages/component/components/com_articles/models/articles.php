@@ -21,6 +21,7 @@ class ComArticlesModelArticles extends ComDefaultModelDefault
             ->insert('enabled'      	, 'int')
 			->insert('sort'     		, 'cmd', 'publish_up')
 			->insert('direction'		, 'word', 'desc')
+			->insert('type'		        , 'string')
         ;
     }
 
@@ -55,6 +56,10 @@ class ComArticlesModelArticles extends ComDefaultModelDefault
 
         if(is_numeric($state->tag)) {
             $query->where('FIND_IN_SET('.$state->tag.', REPLACE(SUBSTRING_INDEX(SUBSTR(ANCESTORS,LOCATE(\'"TAGS":["\',ANCESTORS)+CHAR_LENGTH(\'"TAGS":["\')),\'"]\', 1),\'"\', \'\'))', null, null);
+        }
+
+        if($state->type) {
+            $query->where('tbl.type', '=', $state->type);
         }
 
         $query->where('tbl.enabled', '=', 1);
