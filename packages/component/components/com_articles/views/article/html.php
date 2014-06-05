@@ -39,9 +39,17 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
 		header('X-Article-ID: '.$article->id);
 
 		$doc =& JFactory::getDocument();
-		$doc->setTitle($article->title);
-		$doc->setMetaData('Keywords', $article->meta_keywords);
-		$doc->setMetaData('Description', $article->meta_description);
+		if($article->title) {
+			$doc->setTitle($article->title);
+		}
+
+		if($article->meta_keywords) {
+			$doc->setMetaData('Keywords', $article->meta_keywords);
+		}
+
+		if($article->meta_description) {
+			$doc->setMetaData('Description', $article->meta_description);
+		}
 
 		//TODO: Check if itemId
 		$pathway = JFactory::getApplication()->getPathway();

@@ -120,7 +120,7 @@
                     </div>
                 </div>
 				<div class="control-group">
-					<label class="control-label"><?= @text('RELATED_ARTICLES'); ?></label>
+					<label class="control-label"><?= @text('FURTHER_READING'); ?></label>
 					<div class="controls">
 						<?= @helper('com://admin/taxonomy.template.helper.listbox.taxonomies', array(
                             'identifier' => 'com://admin/articles.model.articles',
