@@ -10,11 +10,11 @@ class ComArticlesModelArticles extends ComTaxonomyModelDefault
         parent::__construct($config);
 
         $this->_state
-			->insert('category_id'     	, 'int')
-			->insert('sort'     , 'cmd', 'id')
-			->insert('direction', 'word', 'desc')
-            ->insert('enabled'	, 'int')
-            ->insert('exclude', 'raw')
+			->insert('category_id'	, 'int')
+			->insert('sort'     	, 'cmd', 'id')
+			->insert('direction'	, 'word', 'desc')
+            ->insert('enabled'		, 'int')
+            ->insert('exclude'		, 'raw')
         ;
     }
 
@@ -39,9 +39,11 @@ class ComArticlesModelArticles extends ComTaxonomyModelDefault
             $query->where('tbl.title', 'LIKE', '%'.$state->search.'%');
         }
 
-        if($state->exclude) {
+        if(is_array($state->exclude)) {
             foreach($state->exclude as $key => $exclude) {
-                $query->where('tbl.' . $key, 'NOT IN', $exclude);
+				if(is_numeric($exclude)) {
+					$query->where('tbl.' . $key, 'NOT IN', $exclude);
+				}
             }
         }
     }

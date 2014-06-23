@@ -67,8 +67,9 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
 						$i++;
 					}
 				} else {
-					if(!JSite::getMenu()->getActive()->id) {
-						$pathway->addItem($category->title, JRoute::_('index.php?option=com_makundi&view=category&id='.$category->id));
+					if(!JSite::getMenu()->getActive()->id)
+					{
+						$pathway->addItem($category->title, JRoute::_('index.php?option=com_makundi&view=category&parent_slug_path=' . $category->parent_slug_path . '&slug=' . $category->slug));
 					}
 				}
 

@@ -37,10 +37,7 @@ class ComArticlesDatabaseTableArticles extends KDatabaseTableDefault
                 $relationable,
                 'com://admin/translations.database.behavior.translatable',
                 'com://admin/kutafuta.database.behavior.searchable',
-            ),
-			'filters' => array(
-				'fields' => array('html')
-			)
+            )
         ));
 
         parent::_initialize($config);

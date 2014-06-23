@@ -39,7 +39,7 @@ class ComArticlesTemplateHelperArticle extends KTemplateHelperAbstract
 
         foreach ($config->tags as $tag) {
             $tags .= '<li class="tag">
-                        <a href="' . JRoute::_('index.php?options=com_articles&view=articles&tag=' . $tag->id) . '"><span class="glyphicon glyphicon-tag"></span>'. $tag->title .'</a>
+                        <a href="' . JRoute::_('index.php?option=com_terms&view=tag&id=' . $tag->id . '&slug=' . $tag->slug . '&format=html') . '"><span class="glyphicon glyphicon-tag"></span>'. $tag->title .'</a>
                       </li>';
         }
 

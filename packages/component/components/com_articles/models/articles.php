@@ -8,9 +8,9 @@
 class ComArticlesModelArticles extends ComDefaultModelDefault
 {
 	/**
-	 *
+	 * @param KConfig $config
 	 */
-    public function __construct(KConfig $config)
+	public function __construct(KConfig $config)
     {
         parent::__construct($config);
 
@@ -18,11 +18,13 @@ class ComArticlesModelArticles extends ComDefaultModelDefault
 			->insert('slug'     		, 'string', null, true)
 			->insert('category_id'     	, 'int')
 			->insert('tag'     	        , 'int')
+			->insert('type'		        , 'string')
 			->insert('featured'     	, 'int', null, true)
             ->insert('enabled'      	, 'int')
+			->insert('limit'    		, 'int', 10)
+			->insert('offset'   		, 'int', 0)
 			->insert('sort'     		, 'cmd', 'publish_up')
 			->insert('direction'		, 'word', 'desc')
-			->insert('type'		        , 'string')
         ;
     }
 
