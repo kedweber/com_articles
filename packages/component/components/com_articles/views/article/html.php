@@ -51,30 +51,33 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
 			$doc->setMetaData('Description', $article->meta_description);
 		}
 
-		//TODO: Check if itemId
 		$pathway = JFactory::getApplication()->getPathway();
 
-		if(!JApplication::getInstance('site')->getMenu()->getItems('link', 'index.php?option=com_articles&view=article&id='.$article->id, true)) {
-			if($article->category instanceof KDatabaseRowDefault) {
-				$category = $article->category;
+		if(!JRequest::getVar('Itemid')) {
+			if(!JApplication::getInstance('site')->getMenu()->getItems('link', 'index.php?option=com_articles&view=article&id='.$article->id, true)) {
+				if($article->category instanceof KDatabaseRowDefault) {
+					$category = $article->category;
 
-				$item = JApplication::getInstance('site')->getMenu()->getItems('link', 'index.php?option=com_makundi&view=category&id='.$category->id, true);
+					$item = JApplication::getInstance('site')->getMenu()->getItems('link', 'index.php?option=com_makundi&view=category&id='.$category->id, true);
 
-				if($item) {
-					$i = 0;
-					foreach(explode('/', $item->route) as $part) {
-						$pathway->addItem(ucfirst($part), 'index.php?Itemid='.$item->tree[$i]);
-						$i++;
+					if($item) {
+						$i = 0;
+						foreach(explode('/', $item->route) as $part) {
+							$pathway->addItem(ucfirst($part), 'index.php?Itemid='.$item->tree[$i]);
+							$i++;
+						}
+					} else {
+						if(!JSite::getMenu()->getActive()->id)
+						{
+							$pathway->addItem($category->title, JRoute::_('index.php?option=com_makundi&view=category&parent_slug_path=' . $category->parent_slug_path . '&slug=' . $category->slug));
+						}
 					}
-				} else {
-					if(!JSite::getMenu()->getActive()->id)
-					{
-						$pathway->addItem($category->title, JRoute::_('index.php?option=com_makundi&view=category&parent_slug_path=' . $category->parent_slug_path . '&slug=' . $category->slug));
-					}
+
+					$pathway->addItem($article->title);
 				}
-
-				$pathway->addItem($article->title);
 			}
+		} else {
+			$pathway->addItem($article->title);
 		}
 
 		return parent::display();
