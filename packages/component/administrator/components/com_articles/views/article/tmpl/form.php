@@ -1,7 +1,6 @@
 <? defined('KOOWA') or die; ?>
 
 <?= @helper('behavior.mootools'); ?>
-
 <?= @helper('behavior.keepalive'); ?>
 <?= @helper('behavior.validator'); ?>
 
@@ -31,7 +30,7 @@
                     </div>
                 </div>
 				<div class="control-group">
-					<label class="control-label"><?= @text('FIELDSET'); ?></label>
+					<label class="control-label"><?= @text('FIELDS'); ?></label>
 					<?= @template('com://admin/cck.view.connection.listbox'); ?>
 				</div>
             </fieldset>

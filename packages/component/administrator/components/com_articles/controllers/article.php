@@ -7,5 +7,5 @@ class ComArticlesControllerArticle extends ComDefaultControllerDefault
         $this->mixin($this->getService('com://admin/kutafuta.controller.behavior.indexable'));
 
         parent::_initialize($config);
-    }
+	}
 }
