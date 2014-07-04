@@ -1,0 +1,17 @@
+{
+    "name": "cta/articles",
+    "type": "joomlatools-installer",
+    "description": "Articles Package. Second version.",
+    "keywords": ["joomla", "articles"],
+    "homepage": "https://moyoweb.assembla.com/code/cta-platform/git-3/nodes",
+    "authors": [
+        {
+            "name": "Joachim van de Haterd",
+            "email": "joachim@moyoweb.nl",
+            "homepage": "http://www.moyoweb.nl"
+        }
+    ],
+    "require": {
+        "joomlatools/installer": "*"
+    }
+}
