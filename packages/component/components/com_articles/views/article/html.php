@@ -21,20 +21,14 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
         parent::_initialize($config);
     }
 
-    public function setLayout($layout)
-    {
-        $article = $this->getModel()->getItem();
-
-        if (!KRequest::get('get.layout', 'string') && $article->type) {
-            $layout = $article->type;
-        }
-
-        parent::setLayout($layout);
-    }
-
 	public function display()
 	{
 		$article = $this->getModel()->getItem();
+
+		$layout = end(explode(':', $article->layout));
+		$this->setLayout($layout ? $layout : 'default');
+
+		$menu = JFactory::getApplication()->getMenu();
 
 		header('X-Article-ID: '.$article->id);
 
@@ -53,8 +47,12 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
 
 		$pathway = JFactory::getApplication()->getPathway();
 
-		if(!JRequest::getVar('Itemid')) {
-			if(!JApplication::getInstance('site')->getMenu()->getItems('link', 'index.php?option=com_articles&view=article&id='.$article->id, true)) {
+		$itemid = JRequest::getVar('Itemid');
+
+		$menu_item = JApplication::getInstance('site')->getMenu()->getItems('link', 'index.php?option=com_articles&view=article&id='.$article->id, true);
+
+		if(!$itemid) {
+			if(!$menu_item) {
 				if($article->category instanceof KDatabaseRowDefault) {
 					$category = $article->category;
 
@@ -76,7 +74,7 @@ class ComArticlesViewArticleHtml extends ComDefaultViewHtml
 					$pathway->addItem($article->title);
 				}
 			}
-		} else {
+		} elseif($itemid != $menu_item->id) {
 			$pathway->addItem($article->title);
 		}
 

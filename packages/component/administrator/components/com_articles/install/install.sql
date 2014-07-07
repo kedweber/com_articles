@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `#__articles_articles` (
   `meta_description` text NOT NULL,
   `meta_keywords` text NOT NULL,
   `type` varchar(255) NOT NULL DEFAULT 'article',
-  `layout` varchar(255) NOT NULL DEFAULT 'article',
+  `layout` varchar(255) NOT NULL DEFAULT 'default',
   `fields` text,
   `ordering` bigint(20) unsigned NOT NULL,
   `frontpage` tinyint(1) NOT NULL DEFAULT '0',
