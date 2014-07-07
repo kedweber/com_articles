@@ -12,10 +12,16 @@ class ComArticlesTemplateHelperRandom extends KTemplateHelperAbstract
 {
     public static $types = 'image';
 
-    private function getImages(KConfig $config)
-    {
-        return $this->getService('com://admin/files.controller.file')->types($config->types)->container($config->container)->browse();
-    }
+	private function getImages(KConfig $config)
+	{
+		try {
+			$images = $this->getService('com://admin/files.controller.file')->types($config->types)->container($config->container)->browse();
+		} catch (Exception $e) {
+			$images = null;
+		}
+
+		return $images;
+	}
 
     public function image($config = array())
     {
