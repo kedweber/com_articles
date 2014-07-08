@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `#__articles_articles` (
   `layout` varchar(255) NOT NULL DEFAULT 'default',
   `fields` text,
   `ordering` bigint(20) unsigned NOT NULL,
-  `frontpage` tinyint(1) NOT NULL DEFAULT '0',
+  `featured` tinyint(1) NOT NULL DEFAULT '0',
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
   `created_on` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created_by` int(11) NOT NULL DEFAULT '0',
