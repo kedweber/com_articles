@@ -18,15 +18,6 @@ class ComArticlesControllerArticle extends ComDefaultControllerDefault
 	 */
 	protected function _initialize(KConfig $config)
 	{
-		$cacheable = $this->getBehavior('com://site/moyo.controller.behavior.cacheable',
-			array(
-				'modules' => array(
-					'banner',
-					'left'
-				)
-			)
-		);
-
         $metadataable = $this->getBehavior('com://site/articles.controller.behavior.metadataable',
             array(
                 'og' => true
@@ -35,7 +26,6 @@ class ComArticlesControllerArticle extends ComDefaultControllerDefault
 
 		$config->append(array(
 			'behaviors' => array(
-				$cacheable,
                 $metadataable,
 				'com://site/translations.controller.behavior.translatable'
 			)
