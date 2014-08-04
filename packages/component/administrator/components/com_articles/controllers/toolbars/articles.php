@@ -6,7 +6,6 @@ class ComArticlesControllerToolbarArticles extends ComDefaultControllerToolbarDe
     {
         $this
             ->addSeparator()
-            ->addCopy()
             ->addIndex();
 
         return parent::getCommands();
