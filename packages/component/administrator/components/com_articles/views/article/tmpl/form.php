@@ -126,7 +126,7 @@
                             'name' => 'articles[]',
                             'attribs' => array('multiple' => true, 'size' => 10, 'class' => 'select2-listbox'),
                             'filter' => array(
-                                'type' => $article->getTypes(),
+                                'layout' => $article->getTypes(),
                                 'exclude' => array(
                                     'articles_article_id' => array($article->id)
                                 )
