@@ -4,7 +4,10 @@ class ComArticlesControllerToolbarArticles extends ComDefaultControllerToolbarDe
 {
     public function getCommands()
     {
-        $this->addIndex();
+        $this
+            ->addSeparator()
+            ->addCopy()
+            ->addIndex();
 
         return parent::getCommands();
     }

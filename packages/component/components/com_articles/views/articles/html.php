@@ -23,9 +23,16 @@ class ComArticlesViewArticlesHtml extends ComDefaultViewHtml
 
 	public function display()
 	{
+		$app	= JFactory::getApplication();
+		$menu	= $app->getMenu();
+
 		$depends_on = implode(' ', $this->getModel()->getList()->getColumn('id'));
 
 		header('X-Article-IDs: '.$depends_on);
+
+		if($menu->getDefault() != $menu->getActive()) {
+			$this->assign('menu', $menu->getActive());
+		}
 
 		return parent::display();
 	}
