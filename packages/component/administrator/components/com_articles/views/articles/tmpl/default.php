@@ -14,19 +14,19 @@
                 <button title="" class="btn hasTooltip" type="submit" data-original-title="Search"><i class="icon-search"></i></button>
                 <button onclick="document.id('filter_search').value='';this.form.submit();" title="" class="btn hasTooltip" type="button" data-original-title="Clear"><i class="icon-remove"></i></button>
             </div>
-        </div>
 
-        <?= @helper('com://admin/makundi.template.helper.listbox.categories', array(
-            'identifier' => 'com://admin/makundi.model.categories',
-            'prompt' => '- ' . JText::_('Filter by category') . ' -',
-            'check_access' => true,
-            'name' => 'category_id',
-            'attribs' => array(
-                'id' => 'category_id',
-                'onchange' => 'this.form.submit();',
-                'style' => 'margin-right: 5px;'
-            ),
-        )); ?>
+            <?= @helper('com://admin/makundi.template.helper.listbox.categories', array(
+                'identifier' => 'com://admin/makundi.model.categories',
+                'prompt' => '- ' . JText::_('Filter by category') . ' -',
+                'check_access' => true,
+                'name' => 'category_id',
+                'attribs' => array(
+                    'id' => 'category_id',
+                    'onchange' => 'this.form.submit();',
+                    'style' => 'margin-left: 5px; font-size: 13px;'
+                ),
+            )); ?>
+        </div>
 
         <table class="table table-striped">
             <thead>
