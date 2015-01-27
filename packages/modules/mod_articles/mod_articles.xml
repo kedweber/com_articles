@@ -11,7 +11,7 @@
     <authorUrl>http://www.moyoweb.nl</authorUrl>
     <copyright>Copyright (C) 2006 - 2014 Moyo Web Architects (ICTIP B.V). All rights reserved.</copyright>
     <license>Commercial</license>
-    <version>1.0.0</version>
+    <version>2.2.1</version>
     <description>Articles</description>
 	<files>
 		<folder>tmpl</folder>
