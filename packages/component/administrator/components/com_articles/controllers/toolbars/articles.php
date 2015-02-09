@@ -7,7 +7,12 @@ class ComArticlesControllerToolbarArticles extends ComDefaultControllerToolbarDe
         $this
             ->addSeparator()
             ->addCopy()
-            ->addIndex();
+            ->addIndex()
+            ->addSeparator();
+
+        if(JFactory::getUser()->authorise('core.admin')) {
+            $this->addCheckin();
+        }
 
         return parent::getCommands();
     }
@@ -19,6 +24,18 @@ class ComArticlesControllerToolbarArticles extends ComDefaultControllerToolbarDe
         $command->append(array(
             'attribs' => array(
                 'data-action' => 'index',
+                'data-novalidate' => 'novalidate'
+            )
+        ));
+    }
+
+    public function _commandCheckin(KControllerToolbarCommand $command)
+    {
+        $command->icon = 'checkin';
+        $command->label = JText::_('Checkin');
+        $command->append(array(
+            'attribs' => array(
+                'data-action' => 'checkin',
                 'data-novalidate' => 'novalidate'
             )
         ));
