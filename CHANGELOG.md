@@ -2,6 +2,10 @@
 
 ## CHANGELOG
 
+### 2.2.3 - 27 february 2015
+
+* Added orderable behavior
+
 ### 2.2.2 - 12 february 2015
 
 * Added manual checkin feature.
