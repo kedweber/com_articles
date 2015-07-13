@@ -1,9 +1,9 @@
 {
-    "name": "cta/articles",
+    "name": "moyo/articles",
     "type": "joomlatools-installer",
     "description": "Articles Package",
     "keywords": ["joomla", "nooku", "articles"],
-    "homepage": "https://github.com/cta-int/articles",
+    "homepage": "https://github.com/kedweber/com_articles",
     "authors": [
         {
             "name": "Joachim van de Haterd",
